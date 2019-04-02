@@ -1,0 +1,51 @@
+<div class="box">
+    <div class="title"><b><?php echo lang('poke::suggested-pokes') ?></b></div>
+    <div class="box-content slimscroll" data-height="250px">
+
+
+        <?php
+        $followers_that_poked_this_user = get_pokers_that_has_not_already_pokeed_this_current_user();
+        $followers = get_followers(get_userid());
+        $where_user_is_pokee = get_pokee_that_is_the_current_user();
+        //$merge = array_merge($where_user_is_pokee,$followers_that_poked_this_user);
+        $diff = $followers;
+        foreach ($followers_that_poked_this_user as $k => $v) {
+            $diff = array_diff($followers, $v);
+        }
+        if (!empty($diff) || $diff != '') {
+            foreach ($where_user_is_pokee as $k => $v) {
+                $diff = array_diff($diff, $v);
+            }
+        }
+        if ((empty($diff) || $diff == '')):
+            ?>
+            <div class="alert alert-info"><?php _lang('poke::no-suggestion-available') ?></div>
+        <?php
+        else:
+            $diff = array_slice($diff, 0, 6);
+            foreach ($diff as $f): $user = find_user($f);
+                ?>
+                <div class="notification media media-md">
+                    <div class="media-left" style="padding-right: 5px">
+                        <div class="media-object"><img src="<?php echo get_avatar(75, $user) ?>"/></div>
+                    </div>
+                    <div class="media-body">
+                                <span style="display:block" class="help-block"><b><a
+                                            href=" <?php echo profile_url(null, $user) ?>"><?php echo get_user_name($user); ?></a></b></span>
+                                <span
+                                    id="suggest-<?php echo trim($f); ?>"
+                                    onclick="poke_me(<?php echo $f ?>,'suggest')"
+                                    style="    float: right;
+    position: relative;
+    top: -20px;
+    font-size: 11px;
+    padding: 2px;
+    right: -15px;"
+                                    class=" btn-sm btn btn-info"><img src="<?php echo img('poke::images/icon1.png') ?>"
+                                                                      style="width:15px; display: inline-block;margin-right:5px"/> <?php echo lang('poke::poke') ?> </span>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+</div>

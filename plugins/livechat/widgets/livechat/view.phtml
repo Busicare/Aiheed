@@ -1,0 +1,43 @@
+<?php if(is_loggedIn()): ?>
+    <?php $app = app(); if(isset($app->profilePage)) {$type = 'page'; $type_id = $app->profilePage['page_id'];} else if(isset($app->profileEvent)) {$type = 'event'; $type_id = $app->profileEvent['event_id'];} else if(isset($app->profileGroup)) {$type = 'group'; $type_id = $app->profileGroup['group_id'];} else if(isset($app->profileGame)) {$type = 'game'; $type_id = $app->profileGame['game_id'];} ?>
+    <?php if(isset($type, $type_id)): ?>
+        <div id="livechat" class="box">
+            <div class="row head title"><?php echo lang('livechat::livechat') ?></div>
+            <div class="row body">
+                <div class="col-sm-12 chatbox-container">
+                    <div id="livechat-chatbox" class="chatbox clearfix slimscroll" data-height="320px">
+                    </div>
+                </div>
+            </div>
+            <div class="row foot">
+                <form id="livechat-form" action="<?php echo url_to_pager('livechat-ajax') ?>" method="post" autocomplete="off">
+                    <input id="livechat-type" name="val[type]" value="<?php echo $type ?>" type="hidden" />
+                    <input id="livechat-type-id" name="val[type_id]" value="<?php echo $type_id ?>" type="hidden" />
+                    <div class="col-sm-8 message-box-container">
+                        <input id="livechat-message-box" name="val[message]" type="text" class="form-control message-box" />
+                    </div>
+                    <div class="col-sm-2 emoticon-button-container">
+                        <div class="emoticon-box  pull-right"></div>
+                        <button title="<?php echo lang('livechat::emoticons') ?>" class="emoticon-button ion-android-happy" data-target="livechat-message-box" data-action="0"></button>
+                    </div>
+                    <div class="col-sm-2 send-button-container">
+                        <button title="<?php echo lang('livechat::send') ?>" class="send-button ion-android-send" type="submit"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <input id="livchat-messages-limit" name="livchat_messages_limit" type="hidden" value="<?php echo $livechat_messages_limit ?>" class="livchat-messages-limit" />
+        <script class>
+            try {
+                document.addEventListener( "DOMContentLoaded", function() {
+                    document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
+                    liveChat.init(<?php echo $livechat_messages_limit ?>);
+                }, false );
+            } catch (e) {
+                setTimeout(function () {
+                    liveChat.init(<?php echo $livechat_messages_limit ?>);
+                }, 5000);
+            }
+        </script>
+    <?php endif ?>
+<?php endif ?>

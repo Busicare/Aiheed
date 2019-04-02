@@ -1,0 +1,15 @@
+<div style="display: none"
+     data-poke-translate="<?php echo lang('poke::poke')?>"
+     data-parameters="<?php echo ($poke = check_existing_poke($id, get_userid())) ? $poke['poke_id'].','.$poke['pokee'].','.$poke['poker'] : '' ?>"
+     data-lang-type="<?php echo (check_existing_poke($id, get_userid())) ? lang('poke::poke-back') : lang('poke::poke'); ?>"
+     data-poke_exist="<?php echo (check_existing_poke($id, get_userid())) ? 1 : 0; ?>"
+     data-profile-owner="<?php echo ($id == get_userid()) ? 'owner' : 'friends' ?>"
+     data-user-state="<?php echo (is_loggedIn()) ? 1 : 0 ?>" data-profile_id_holder="<?php echo $id ?>"
+     id="pk_profiler"></div>
+<!--
+<a href='#' class='btn btn-secondary btn-sm' onclick='return poke_me(this)'>
+    <span>
+        <i class='hand-poke'>&#9758;</i>
+    </span> poke
+</a>
+-->

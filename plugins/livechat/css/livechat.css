@@ -1,0 +1,65 @@
+#livechat [class*="col-"],
+#livechat .row {
+	margin: 0px;
+	padding: 0px;
+}
+
+#livechat .body .chatbox {
+	height: 320px;
+	overflow-y: scroll;
+}
+
+#livechat .body .message {
+	padding: 8px 4px;
+	font-size: 10px;
+}
+
+#livechat .body .message .username {
+	color: rgba(0, 0, 0, .5);
+}
+
+#livechat .body .message .content {
+	padding-left: 1px;
+}
+
+#livechat .foot {
+	border-top: solid 1px #ECEDED;
+	padding: 4px 0px;
+	background-color: #FCFCFC;
+}
+
+#livechat .foot button {
+	width: 36px;
+	height: 36px;
+	border: none;
+	border-radius: 30px;
+	padding: 0px;
+	font-size: 25px;
+	color: #FFFFFF;
+}
+
+#livechat .foot [class*="col-"] {
+	text-align: center;
+}
+
+#livechat .foot .message-box-container {
+	padding: 0px 4px;
+}
+
+#livechat .foot .message-box {
+	border-radius: 4px;
+}
+
+#livechat .foot button.emoticon-button {
+	background-color: #0099FF;
+}
+
+#livechat .foot button.send-button {
+	text-indent: 3px;
+	background-color: #00FF99;
+}
+
+#livechat .emoticon-box {
+	right: 0px;
+	bottom: 0px;
+}

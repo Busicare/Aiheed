@@ -1,0 +1,93 @@
+<?php
+    $images = array(
+        'feed' => img('images/icons/14.png'),
+        'feeds' => img('images/icons/14.png'),
+        'news-feed' => img('images/icons/14.png'),
+        'feed::news-feed' => img('images/icons/14.png'),
+        'feed::feed' => img('images/icons/14.png'),
+        'feed::feeds' => img('images/icons/14.png'),
+        'blog' => img('images/icons/04.png'),
+        'blogs' => img('images/icons/04.png'),
+        'blog::blogs' => img('images/icons/04.png'),
+        'blog::blog' => img('images/icons/04.png'),
+        'event' => img('images/icons/06.png'),
+        'events' => img('images/icons/06.png'),
+        'event::events' => img('images/icons/06.png'),
+        'event::event' => img('images/icons/06.png'),
+        'game' => img('images/icons/09.png'),
+        'games' => img('images/icons/09.png'),
+        'game::game' => img('images/icons/09.png'),
+        'game::games' => img('images/icons/09.png'),
+        'group' => img('images/icons/11.png'),
+        'groups' => img('images/icons/11.png'),
+        'group::groups' => img('images/icons/11.png'),
+        'group::group' => img('images/icons/11.png'),
+        'marketplace' => img('images/icons/21.png'),
+        'market-place' => img('images/icons/21.png'),
+        'marketplace::marketplace' => img('images/icons/21.png'),
+        'marketplace::market-place' => img('images/icons/21.png'),
+        'music' => img('images/icons/31.png'),
+        'musics' => img('images/icons/31.png'),
+        'music::music' => img('images/icons/31.png'),
+        'music::musics' => img('images/icons/31.png'),
+        'page' => img('images/icons/19.png'),
+        'pages' => img('images/icons/19.png'),
+        'page::page' => img('images/icons/19.png'),
+        'page::pages' => img('images/icons/19.png'),
+        'photo::photos' => img('images/icons/22.png'),
+        'photo' => img('images/icons/22.png'),
+        'photos' => img('images/icons/22.png'),
+        'photo::photo' => img('images/icons/22.png'),
+        'video' => img('images/icons/13.png'),
+        'videos' => img('images/icons/13.png'),
+        'video::video' => img('images/icons/13.png'),
+        'video::videos' => img('images/icons/13.png'),
+        'ad'=> img('images/icons/39.png'),
+        'ads'=> img('images/icons/39.png'),
+        'ads::ad'=> img('images/icons/39.png'),
+        'ads::ads'=> img('images/icons/39.png'),
+        'forum' => img('images/icons/16.png'),
+        'forum::forum' => img('images/icons/16.png'),
+        'topic' => img('images/icons/16.png'),
+        'forum::topic' => img('images/icons/16.png'),
+        'forum::topics' => img('images/icons/16.png'),
+    );
+    $images = fire_hook('shortcut.menu.images', $images);
+?>
+
+<div class="box sortcut hidden-sm-down">
+    <div class="row">
+        <div class="col-md-12">
+            <?php if(is_loggedIn()): ?>
+            <div class="row sort-list">
+                <a href="<?php echo profile_url() ?>" ajax="true">
+                    <span><img class="sort-avatar" src="<?php echo get_avatar(75) ?>"></span>
+                    <span class="sort-title"><?php echo str_limit (get_user_name(),20); ?></span>
+                </a>
+                <a href="<?php echo url_to_pager('account') ?>" title="View profile" class="pull-right sort-more dropdown-button" ajax="true"> <i class="ion-edit"></i></a>
+            </div>
+            <?php endif ?>
+            <?php foreach(get_menus('main-menu') as $menu): ?>
+                <?php if(array_key_exists($menu->title, $images)): ?>
+                    <div class="row sort-list">
+                        <a ajax="true" href="<?php echo $menu->link ?>">
+                            <span><img class="sort-avatar" src="<?php echo $images[$menu->title] ?>"></span>
+                            <span class="sort-title"><?php echo lang($menu->title) ?></span>
+                        </a>
+                    </div>
+                <?php endif ?>
+            <?php endforeach ?>
+            <h4 class="sort-title-head"><?php echo lang('explore'); ?></h4>
+            <?php foreach(get_menus('main-menu') as $menu): ?>
+                <?php if(!array_key_exists($menu->title, $images)): ?>
+                <div class="row sort-list">
+                    <a ajax="true" href="<?php echo $menu->link ?>">
+                        <span> <i class="<?php echo $menu->icon ?>"></i></span>
+                        <span class="sort-title"><?php echo lang($menu->title) ?></span>
+                    </a>
+                </div>
+                <?php endif ?>
+            <?php endforeach ?>
+        </div>
+    </div>
+</div>

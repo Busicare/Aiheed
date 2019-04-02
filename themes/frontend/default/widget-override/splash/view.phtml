@@ -1,0 +1,44 @@
+<div id="topo" class="<?php if(isMobile()):?> <?php echo 'bg-mobile'; endif ?> auto">
+    <?php if(!isMobile()):?>
+        <div id="slides">
+            <div class="slide slide-1"></div>
+            <div class="slide slide-2"></div>
+            <div class="slide slide-3"></div>
+        </div>
+    <?php endif?>
+    <div id="topo-content" >
+        <div class="container">
+
+
+            <div class="row" style="">
+                <div class="col-sm-7"  id="welcome-notes">
+
+                    <h2 class="big"><?php _lang('welcome')?> <span><?php  _lang('to-our')?> <?php echo config('site_title')?></span></h2>
+
+                         <div id="home-social-notes" class="">
+                        <?php _lang('welcome-note')?>
+                    </div>
+                    <div class="social-icons">
+                        <i class="ion-chatboxes"></i>
+                        <i style="margin-top: 30px; " class="ion-ios-compose-outline"></i>
+                        <i class="ion-ios-people-outline"></i>
+                    </div>
+
+                </div>
+
+                <div id="home-login-container" class="col-sm-4">
+                    <div class="login-content hidden-sm-down">
+                        <?php if(config('user-signup', true)):?>
+                            <?php echo view('signup/home-signup');?>
+                        <?php endif?>
+                        
+                   </div>
+                   <div class="hidden-sm-up">
+                       <a class="mobile-account center-col" href="<?php echo url_to_pager('login')?>">SIGN IN</a>
+                       <a class="mobile-account center-col" href="<?php echo url_to_pager('signup')?>">REGISTER</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

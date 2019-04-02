@@ -1,0 +1,100 @@
+
+  
+<div class="landing-signup">
+	  	<form id="regform" name="regform" action="<?php echo url_to_pager('signup')?>"   method="post">
+	            <?php CSRFProtection::embed()?>
+	            
+	            <div class="form-group">
+	                <div class="row" >
+	                    <div class="col-md-6">
+	                    	
+	                        <input class="form-control form-control-lg" value="<?php echo input('val.first_name')?>" type="text" name="val[first_name]" placeholder='<?php _lang('first-name')?>' />
+	                        
+	                    </div>
+	                    <div class="col-md-6">
+	                        <input class="form-control form-control-lg" value="<?php echo input('val.last_name')?>" type="text" name="val[last_name]" placeholder="<?php _lang('last-name')?>"/>
+	                    </div>
+	                </div>
+	            </div>
+
+	            <div class="form-group" >
+	                <input  class="form-control form-control-lg " value="<?php echo input('val.username')?>" type="text" name="val[username]" placeholder="<?php _lang('username')?>"/>
+	            </div>
+
+	            <div class="form-group">
+	                <input id="email_phonenumber"  class="form-control form-control-lg" value="<?php echo input('val.email_address')?>" type="text" name="val[email_address]" placeholder='<?php _lang('email-address')?>'/>
+	            </div>
+	            <div class="form-group">
+	                <input  class="form-control form-control-lg" value="<?php echo input('val.password')?>" type="password" name="val[password]" placeholder=' <?php _lang('password')?>'/>
+	            </div>
+	             
+	              <div class="form-group">
+	                <input  class="form-control form-control-lg" value="<?php echo input('val.cpassword')?>" type="password" name="val[cpassword]" placeholder=' <?php _lang('confirm-password')?>'/>
+	            </div>
+
+	            <div class="form-group">
+	                <div class="input-group date" id="birthday">
+	                    <input  name="val[dob_input]" type='text' placeholder="<?php echo date('M/d/Y'); ?>" class="form-control"  />
+	                    <span class="input-group-addon">
+	                        <span class="ion-android-calendar"></span>
+	                    </span>
+	                </div>
+            	</div>
+
+	      
+	           
+	            <div class="form-group row">
+	                <div class="col-md-6">
+	              
+	                    <select class=" form-control" name="val[gender]">
+	                        <option <?php echo (input("val.gender") == "male") ? "selected" : null?> value="male"><?php _lang('male')?></option>
+	                        <option <?php echo (input("val.gender") == "female") ? "selected" : null?> value="female"><?php _lang('female')?></option>
+	                    </select>
+	                </div>
+
+	                <div class="col-md-6">
+	           
+	                    <select id="country" class=" form-control" name="val[country]">
+	                    <option value=""><?php _lang('country')?></option>
+	                    <?php foreach(get_countries() as $country => $name):?>
+	                        <option <?php echo (input("val.country") == $name) ? "selected" : null?> value="<?php echo $name?>"><?php echo ucwords($name)?></option>
+	                    <?php endforeach?>
+	                	</select>
+                    </div>
+
+
+
+
+	            </div>
+
+
+	            <?php echo fire_hook('signup.form.extend', null, array('')) ?>
+	            <?php if(get_setting("enable-captcha")):?>
+	                <?php if(get_setting("enable-captcha") == '1'):?>
+	                    <div class="row captcha">
+	                        <div class="col-md-6">
+	                            <input class="form-control" type="text" placeholder="<?php _lang('enter-text-below')?>" name="captcha" id="captcha-input"/>
+	                        </div>
+	                        <div class="col s6">
+	                            <img id="captcha-image" src="<?php echo url("captcha.php")?>"/>
+	                            <a style="position: relative;bottom: 10px" href="javascript:void(0)" onclick="document.getElementById('captcha-image').src='<?php echo url('captcha.php')?>?'+Math.random();
+	                                document.getElementById('captcha-input').focus();
+	                                "><i class="ion-ios-reload"></i></a><br/>
+	                        </div>
+	                    </div>
+
+	                <?php else:?>
+	                    <div class="g-recaptcha" data-sitekey="<?php echo config('recaptcha-key'); ?>"></div>
+	                    <script type="text/javascript"
+	                            src="https://www.google.com/recaptcha/api.js?hl=en">
+	                    </script>
+	                <?php endif?>
+	            <?php endif?>
+
+	            <div  class="" style="text-align: center">
+	                <button onclick="setdateValue()" style="margin-top: 17px;" class="btn bt-reg bt-info btn-block"><?php _lang('signup')?> </button>
+	            </div>
+
+	        </form>
+	     </div>
+

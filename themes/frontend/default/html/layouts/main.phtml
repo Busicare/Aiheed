@@ -1,0 +1,23 @@
+<?php echo view('layouts/menu') ?>
+<div class="dashboard-content" style="padding: 0">
+    <?php theme_extend('main.extend') ?>
+    <!--Side bar menu-->
+    <?php $enable_side_menu = app()->currentColumn == TWO_COLUMN_RIGHT_LAYOUT; ?>
+        <?php if ($enable_side_menu): ?>
+        <div class="container">
+        <div class="row">
+            <div class="main-sidebar-menu col-md-2">
+                <?php echo view('layouts/sidemenu'); ?>
+            </div>
+            <div class="col-md-10" style="padding: 0px !important;">
+                <?php echo $content ?>
+            </div>
+        </div>
+        </div>
+        <?php else: ?>
+            <?php echo $content ?>
+        <?php endif ?>
+    </div>
+</div>
+
+
